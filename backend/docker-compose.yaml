@@ -1,0 +1,28 @@
+services:
+  backend:
+    # Build from the Dockerfile in current directory
+    build:
+      context:.
+      dockerfile: Dockerfile
+
+    # Container name (easy to identify)
+    container_name: greenfield-ems-backend
+
+    # Port mapping: host:container
+    ports:
+      - "5000:5000"
+
+    # Environment variables from .env file
+    env_file:
+      - .env
+
+    # Keep uploaded files even if container is destroyed
+    volumes:
+      - uploads:/app/src/uploads
+
+    # Restart automatically if it crashes
+    restart: unless-stopped
+
+# Named volume (persists data outside the container)
+volumes:
+  uploads:
