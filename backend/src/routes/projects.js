@@ -19,6 +19,7 @@ router.get('/', auth, async (req, res) => {
 router.post('/', auth, async (req, res) => {
   try {
     const { name, code, budget } = req.body;
+    if (!name || !code) {
       return res.status(400).json({ error: 'Name and code are required' });
     }
     const pool = await getPool();
